@@ -1,4 +1,4 @@
-@startuml context
+@startuml 
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 AddRelTag("async", $lineStyle = DashedLine())
 SHOW_PERSON_PORTRAIT()
@@ -11,13 +11,13 @@ Person(subscriber,"Platform Subscriber","Subscribes to the platform to access vi
 System_Boundary(gateway, "Codeflix") {
     Container(catalog_admin_frontend,"Frontend: Video Catalog Admin","React","SPA that manages videos, including categories and genres")
     Container(catalog_admin_backend,"Backend: Video Catalog Admin","Any Language","Manages the video catalog, including categories and genres")
-    Container(catalog_admin_backend_database,"Video Catalog Admin Database","MySQL","Stores video catalog data")
+    ContainerDb(catalog_admin_backend_database,"Video Catalog Admin Database","MySQL","Stores video catalog data")
     Rel(catalog_admin_frontend,catalog_admin_backend,"Interacts with via","HTTPS/JSON")
     Rel(catalog_admin_backend,catalog_admin_backend_database,"Interacts with using","TCP")
     
     Container(encoder,"Video Encoder","Go","Encodes videos to mpeg-dash")
-    Container(encoded_videos_bucket,"Encoded Videos Storage Bucket","GCP")
-    Container(raw_videos_bucket,"Raw Videos Storage Bucket","GCP")
+    ContainerDb(encoded_videos_bucket,"Encoded Videos Storage Bucket","GCP")
+    ContainerDb(raw_videos_bucket,"Raw Videos Storage Bucket","GCP")
     Rel(encoder,encoded_videos_bucket,"Uploads converted video via","HTTPS")
     Rel(encoder,raw_videos_bucket,"Downloads raw video via","HTTPS")
     Rel(catalog_admin_backend,raw_videos_bucket,"Uploads raw video via","HTTPS")
@@ -29,7 +29,7 @@ System_Boundary(gateway, "Codeflix") {
 
     Container(catalog_frontend,"Video Catalog Frontend","React","Provides navigation and playback of videos for subscribers")
     Container(catalog_api,"Video Catalog API","Any Language","Provides endpoints for video navigation and playback")
-    Container(catalog_api_database,"API Database","Elasticsearch","Stores data of videos, genres, cast members, and categories")
+    ContainerDb(catalog_api_database,"API Database","Elasticsearch","Stores data of videos, genres, cast members, and categories")
     Container(kafka,"Apache Kafka","Message Broker","Stores and serves data from Kafka Connect")
     Container(kafka_connect,"Kafka Connect","Data Integration","Service for replicating catalog data")
     Rel(catalog_api,catalog_api_database,"Interacts with via","HTTPS/JSON")
@@ -38,7 +38,7 @@ System_Boundary(gateway, "Codeflix") {
     Rel(kafka_connect,kafka,"Interacts with via","Kafka Protocol",$tags = "async")
 
     Container(subscription,"Any Language","Subscription","Manages subscriber plans and subscriptions")
-    Container(subscription_postgres,"Subscription Database","Postgres","Stores subscriber and subscription plan data")
+    ContainerDb(subscription_postgres,"Subscription Database","Postgres","Stores subscriber and subscription plan data")
     Rel(subscription,subscription_postgres,"Interacts with via","Postgres Protocol")
 
     Container(keycloak,"Keycloak","Identity Service","Authenticates all platform users")

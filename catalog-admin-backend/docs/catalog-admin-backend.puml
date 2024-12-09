@@ -1,0 +1,23 @@
+@startuml 
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+AddRelTag("async", $lineStyle = DashedLine())
+
+System_Boundary(Codeflix, "Codeflix") {
+  System(Frontend, "Frontend: Video Catalog Admin", "SPA that manages videos, including categories and genres")
+  System(Encoder, "Video Encoder", "Encodes videos to mpeg-dash")
+  System(Kafka, "Kafka Connect", "Catalog data replication service")
+    
+  System_Boundary(Backend, "Backend: Videos Catalog Admin") {
+    Container(App, "App", "Any Language", "System that manages videos, including categories and genres")
+    ContainerDb(Database, "Database", "MySQL", "Stores catalog data")
+    Container(Bucket, "Video Bucket", "Google Cloud Storage", "Stores raw videos")
+
+    Rel(Frontend, App, "Interacts with via", "HTTPS")
+    Rel(App, Encoder, "Publishes newly created video data via", "Queue: videos.new", $tags = "async")
+    Rel(Encoder, App, "Consumes converted video data via", "Queue: videos.converted", $tags = "async")
+    Rel(App, Database, "Interacts with via", "SQL")
+    Rel(App, Bucket, "Uploads video via", "HTTPS")
+    Rel(Kafka, Database, "Copies data using connector", "Debezium MySQL")
+  } 
+}
+@enduml
