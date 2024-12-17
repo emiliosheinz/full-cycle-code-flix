@@ -1,4 +1,4 @@
-import { ValueObject } from '../value-object';
+import { ValueObject } from '../domain/value-object';
 
 class StubValueObject extends ValueObject {
   constructor(readonly value: string) {
