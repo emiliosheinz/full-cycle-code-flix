@@ -1,7 +1,10 @@
+import { EntityValidationError } from '../../../shared/domain/validators/validation.error';
 import { Uuid } from '../../../shared/domain/value-objects/uuid.vo';
 import { Category } from '../category.entity';
 
 describe('Category', () => {
+	const validateSpy = jest.spyOn(Category, 'validate');
+
 	describe('constructor', () => {
 		test('should create a category with default values', () => {
 			const category = new Category({
@@ -46,6 +49,7 @@ describe('Category', () => {
 			expect(category.description).toBeNull();
 			expect(category.is_active).toEqual(true);
 			expect(category.created__at).toBeInstanceOf(Date);
+			expect(validateSpy).toHaveReturnedTimes(1);
 		});
 
 		test('should create a category with provided values', () => {
@@ -60,6 +64,7 @@ describe('Category', () => {
 			expect(category.description).toEqual('Movie description');
 			expect(category.is_active).toEqual(false);
 			expect(category.created__at).toBeInstanceOf(Date);
+			expect(validateSpy).toHaveReturnedTimes(1);
 		});
 	});
 
@@ -71,6 +76,7 @@ describe('Category', () => {
 		category.changeName('Comedy');
 
 		expect(category.name).toEqual('Comedy');
+		expect(validateSpy).toHaveReturnedTimes(2);
 	});
 
 	test('should change the category description', () => {
@@ -82,6 +88,7 @@ describe('Category', () => {
 		category.changeDescription('My updated description');
 
 		expect(category.description).toEqual('My updated description');
+		expect(validateSpy).toHaveReturnedTimes(2);
 	});
 
 	test('should activate the category', () => {
@@ -93,6 +100,7 @@ describe('Category', () => {
 		category.activate();
 
 		expect(category.is_active).toEqual(true);
+		expect(validateSpy).toHaveReturnedTimes(1);
 	});
 
 	test('should deactivate the category', () => {
@@ -103,5 +111,21 @@ describe('Category', () => {
 		category.deactivate();
 
 		expect(category.is_active).toEqual(false);
+		expect(validateSpy).toHaveReturnedTimes(1);
+	});
+
+	describe('validate', () => {
+		describe('create', () => {
+			test.each(['', null, undefined])(
+				'should throw error when create is called with invalid name "%s"',
+				(name) => {
+					expect(() => {
+						Category.create({
+							name: name!,
+						});
+					}).toThrow(EntityValidationError);
+				},
+			);
+		});
 	});
 });

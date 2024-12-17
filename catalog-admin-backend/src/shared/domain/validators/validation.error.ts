@@ -15,15 +15,17 @@ export abstract class BaseValidationError extends Error {
 
 export class ValidationError extends Error {}
 
-export class EntityValidationError extends BaseValidationError {
-	constructor(public error: FieldsErrors[]) {
-		super(error, 'Entity Validation Error');
-		this.name = 'EntityValidationError';
+export class EntityValidationError extends Error {
+	constructor(
+		public error: FieldsErrors,
+		message = 'Validation Error',
+	) {
+		super(message);
 	}
 }
 
 export class SearchValidationError extends BaseValidationError {
-	constructor(error: FieldsErrors[]) {
+	constructor(public error: FieldsErrors[]) {
 		super(error, 'Search Validation Error');
 		this.name = 'SearchValidationError';
 	}
