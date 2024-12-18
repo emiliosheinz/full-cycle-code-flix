@@ -144,39 +144,39 @@ describe('Category', () => {
 				});
 			});
 
-      test("should throw error when create is called with name longer than 255 characters", () => {
-        expect(() => {
-          Category.create({
-            name: 'a'.repeat(256),
-          });
-        }).containsErrorMessages({
-          name: ['name must be shorter than or equal to 255 characters'],
-        });
-      })
+			test('should throw error when create is called with name longer than 255 characters', () => {
+				expect(() => {
+					Category.create({
+						name: 'a'.repeat(256),
+					});
+				}).containsErrorMessages({
+					name: ['name must be shorter than or equal to 255 characters'],
+				});
+			});
 
-      test("should throw error when create is called with invalid description", () => {
-        expect(() => {
-          Category.create({
-            name: 'Movie',
-            // biome-ignore lint: Send invalid value to create function
-            description: 123 as any,
-          });
-        }).containsErrorMessages({
-          description: ['description must be a string'],
-        });
-      })
+			test('should throw error when create is called with invalid description', () => {
+				expect(() => {
+					Category.create({
+						name: 'Movie',
+						// biome-ignore lint: Send invalid value to create function
+						description: 123 as any,
+					});
+				}).containsErrorMessages({
+					description: ['description must be a string'],
+				});
+			});
 
-      test("should throw error when create is called with invalid is_active", () => {
-        expect(() => {
-          Category.create({
-            name: 'Movie',
-            // biome-ignore lint: Send invalid value to create function
-            is_active: 123 as any,
-          });
-        }).containsErrorMessages({
-          is_active: ['is_active must be a boolean value'],
-        });
-      })
+			test('should throw error when create is called with invalid is_active', () => {
+				expect(() => {
+					Category.create({
+						name: 'Movie',
+						// biome-ignore lint: Send invalid value to create function
+						is_active: 123 as any,
+					});
+				}).containsErrorMessages({
+					is_active: ['is_active must be a boolean value'],
+				});
+			});
 		});
 	});
 });
