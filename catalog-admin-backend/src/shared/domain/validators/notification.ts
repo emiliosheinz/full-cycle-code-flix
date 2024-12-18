@@ -16,9 +16,9 @@ export class Notification {
 			this.errors.set(field, Array.isArray(error) ? error : [error]);
 		} else {
 			if (Array.isArray(error)) {
-				error.forEach((value) => {
+				for (const value of error) {
 					this.errors.set(value, value);
-				});
+				}
 				return;
 			}
 			this.errors.set(error, error);

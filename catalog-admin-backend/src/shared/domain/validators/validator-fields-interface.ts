@@ -1,4 +1,4 @@
-import { Notification } from './notification';
+import type { Notification } from './notification';
 
 export type FieldsErrors =
 	| {
@@ -7,5 +7,9 @@ export type FieldsErrors =
 	| string;
 
 export interface IValidatorFields {
-	validate(notification: Notification, data: any, fields: string[]): boolean;
+	validate(
+		notification: Notification,
+		data: unknown,
+		fields: string[],
+	): boolean;
 }

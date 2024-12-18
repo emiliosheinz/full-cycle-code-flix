@@ -1,4 +1,4 @@
-import { FieldsErrors } from './validator-fields-interface';
+import type { FieldsErrors } from './validator-fields-interface';
 
 export abstract class BaseValidationError extends Error {
 	constructor(

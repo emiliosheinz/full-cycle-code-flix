@@ -121,6 +121,7 @@ describe('Category', () => {
 				(name) => {
 					expect(() => {
 						Category.create({
+							// biome-ignore lint: Send invalid value to create function
 							name: name!,
 						});
 					}).toThrow(EntityValidationError);

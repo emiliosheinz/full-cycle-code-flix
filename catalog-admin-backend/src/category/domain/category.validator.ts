@@ -5,7 +5,7 @@ import {
 	IsString,
 	MaxLength,
 } from 'class-validator';
-import { Category } from './category.entity';
+import type { Category } from './category.entity';
 import { ClassValidatorFields } from '../../shared/domain/validators/class-validator-field';
 
 class CategoryRules {
@@ -30,13 +30,7 @@ class CategoryRules {
 }
 
 export class CategoryValidator extends ClassValidatorFields {
-	validate(entity: Category) {
+	validate<Category>(entity: Category) {
 		return super.validate(new CategoryRules(entity));
-	}
-}
-
-export class CategoryValidatorFactory {
-	static create() {
-		return new CategoryValidator();
 	}
 }

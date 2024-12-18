@@ -27,6 +27,7 @@ describe('ValueObject', () => {
 
 	test('should not be equals when null', () => {
 		const valueObject1 = new StubValueObject('mock');
+		// biome-ignore lint: Send invalid value to function
 		expect(valueObject1.equals(null as any)).toEqual(false);
 	});
 

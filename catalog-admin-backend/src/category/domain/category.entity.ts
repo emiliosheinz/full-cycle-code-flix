@@ -1,6 +1,6 @@
 import { EntityValidationError } from '../../shared/domain/validators/validation.error';
 import { Uuid } from '../../shared/domain/value-objects/uuid.vo';
-import { CategoryValidatorFactory } from './category.validator';
+import { CategoryValidator } from './category.validator';
 
 export type CategoryConstructorProps = {
 	category_id?: Uuid;
@@ -56,9 +56,9 @@ export class Category {
 	}
 
 	static validate(entity: Category) {
-		const validator = CategoryValidatorFactory.create();
+		const validator = new CategoryValidator();
 		if (!validator.validate(entity)) {
-			throw new EntityValidationError(validator.errors!);
+			throw new EntityValidationError(validator.errors ?? {});
 		}
 	}
 

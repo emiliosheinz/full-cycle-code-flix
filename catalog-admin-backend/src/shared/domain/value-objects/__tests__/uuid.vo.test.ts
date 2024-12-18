@@ -2,6 +2,7 @@ import { InvalidUuidError, Uuid } from '../uuid.vo';
 import { validate as uuidValidate } from 'uuid';
 
 describe('Uuid Value Object', () => {
+	// biome-ignore lint: Spy on private method
 	const validateSpy = jest.spyOn(Uuid.prototype as any, 'validate');
 
 	test('should throw an error when id is invalid', () => {
