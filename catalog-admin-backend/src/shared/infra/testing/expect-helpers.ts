@@ -13,13 +13,20 @@ function isValid() {
 	return { pass: true, message: () => '' };
 }
 
+function isMatch(expected: FieldsErrors, received: FieldsErrors) {
+	try {
+		expect(received).toEqual(expect.objectContaining(expected));
+		return true;
+	} catch {
+		return false;
+	}
+}
+
 function assertContainsMessages(
 	expected: FieldsErrors,
 	received: FieldsErrors,
 ) {
-	const isMatch = expect.objectContaining(received).asymetricMatch(expected);
-
-	if (isMatch) {
+	if (isMatch(expected, received)) {
 		return isValid();
 	}
 
@@ -31,7 +38,7 @@ function assertContainsMessages(
 }
 
 expect.extend({
-	containsErrorMessage(
+	containsErrorMessages(
 		expected: ContainsErrorMessageExpected,
 		received: FieldsErrors,
 	) {
@@ -45,7 +52,7 @@ expect.extend({
 			}
 		} else {
 			const { validator, data } = expected;
-			const validated = validator.validate(data);
+			const validated = validator.validate(data as object);
 
 			if (validated) {
 				return isValid();

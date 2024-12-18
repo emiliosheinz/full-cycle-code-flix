@@ -31,6 +31,7 @@ class CategoryRules {
 
 export class CategoryValidator extends ClassValidatorFields {
 	validate<Category>(entity: Category) {
-		return super.validate(new CategoryRules(entity));
+    // biome-ignore lint: weird type issue
+		return super.validate(new CategoryRules(entity as any));
 	}
 }
