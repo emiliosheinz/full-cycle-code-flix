@@ -5,9 +5,9 @@ export interface IRespository<E extends Entity, I extends ValueObject> {
   insert(entity: E): Promise<void>;
   bulkInsert(entities: E[]): Promise<void>;
   update(entity: E): Promise<void>;
-  delete(entity: E): Promise<void>;
+  delete(entity_id: I): Promise<void>;
 
-  findById(entity_id: I): Promise<E>;
+  findById(entity_id: I): Promise<E | null>;
   findAll(): Promise<E[]>;
 
   getEntity(): new (...args: unknown[]) => E;
