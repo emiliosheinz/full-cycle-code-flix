@@ -1,4 +1,5 @@
 import type { Entity } from '../../entity';
+import { NotFoundError } from '../../errors/not-found.error';
 import type { IRespository } from '../../repository/repository-interface';
 import type { ValueObject } from '../../value-object';
 
@@ -22,7 +23,7 @@ export abstract class InMemoryRepository<
     );
 
     if (itemIndex === -1) {
-      throw new Error(`Entity with id ${entity.entity_id} does not exist`);
+      throw new NotFoundError(entity.entity_id, this.getEntity()); 
     }
 
     this.items[itemIndex] = entity;
@@ -34,7 +35,7 @@ export abstract class InMemoryRepository<
     );
 
     if (itemIndex === -1) {
-      throw new Error(`Entity with id ${entity_id} does not exist`);
+      throw new NotFoundError(entity_id, this.getEntity());
     }
 
     this.items.splice(itemIndex, 1);
@@ -49,5 +50,5 @@ export abstract class InMemoryRepository<
     return this.items;
   }
 
-  abstract getEntity(): new (...args: unknown[]) => E;
+	abstract getEntity(): new (...args: unknown[]) => E;
 }
