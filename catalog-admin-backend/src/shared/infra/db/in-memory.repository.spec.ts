@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import { Entity } from '../../entity';
-import type { ValueObject } from '../../value-object';
-import { Uuid } from '../../value-objects/uuid.vo';
+import { Entity } from '../../domain/entity';
+import type { ValueObject } from '../../domain/value-object';
+import { Uuid } from '../../domain/value-objects/uuid.vo';
 import { InMemoryRepository } from './in-memory.repository';
-import { NotFoundError } from '../../errors/not-found.error';
+import { NotFoundError } from '../../domain/errors/not-found.error';
 
 class StubEntity extends Entity {
   id: Uuid = new Uuid();

@@ -1,7 +1,7 @@
-import type { Entity } from '../../entity';
-import { NotFoundError } from '../../errors/not-found.error';
-import type { IRespository } from '../../repository/repository-interface';
-import type { ValueObject } from '../../value-object';
+import type { Entity } from '../../domain/entity';
+import { NotFoundError } from '../../domain/errors/not-found.error';
+import type { IRespository } from '../../domain/repository/repository-interface';
+import type { ValueObject } from '../../domain/value-object';
 
 export abstract class InMemoryRepository<
   E extends Entity,
@@ -21,7 +21,6 @@ export abstract class InMemoryRepository<
     const itemIndex = this.items.findIndex((item) =>
       item.entity_id.equals(entity.entity_id),
     );
-    console.log(itemIndex)
 
     if (itemIndex === -1) {
       throw new NotFoundError(entity.entity_id, this.getEntity()); 
@@ -51,5 +50,6 @@ export abstract class InMemoryRepository<
     return this.items;
   }
 
-	abstract getEntity(): new (...args: unknown[]) => E;
+	// biome-ignore lint/suspicious/noExplicitAny: This is a generic method 
+	abstract getEntity(): new (...args: any[]) => E;
 }
