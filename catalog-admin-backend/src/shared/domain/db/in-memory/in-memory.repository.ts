@@ -21,6 +21,7 @@ export abstract class InMemoryRepository<
     const itemIndex = this.items.findIndex((item) =>
       item.entity_id.equals(entity.entity_id),
     );
+    console.log(itemIndex)
 
     if (itemIndex === -1) {
       throw new NotFoundError(entity.entity_id, this.getEntity()); 
