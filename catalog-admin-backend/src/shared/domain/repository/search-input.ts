@@ -18,7 +18,7 @@ export class SearchInput<Filter = string> extends ValueObject {
   private _sort_dir: SortDirection | null = null;
   private _filter: Filter | null = null;
 
-  constructor(props: SearchParamsConstructorProps<Filter>) {
+  constructor(props: SearchParamsConstructorProps<Filter> = {}) {
     super();
     this.page = props.page;
     this.per_page = props.per_page;
@@ -27,7 +27,7 @@ export class SearchInput<Filter = string> extends ValueObject {
     this.filter = props.filter;
   }
 
-  public get page() {
+  public get page(): number {
     return this._page;
   }
 
@@ -43,7 +43,7 @@ export class SearchInput<Filter = string> extends ValueObject {
     }
   }
 
-  get per_page() {
+  get per_page(): number {
     return this._per_page;
   }
 

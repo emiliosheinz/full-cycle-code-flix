@@ -14,7 +14,10 @@ class StubEntity extends Entity {
   }
 
   toJSON(): Record<string, unknown> {
-    return {};
+    return {
+      id: this.id.id,
+      name: this.name,
+    };
   }
 }
 
