@@ -15,18 +15,18 @@ describe('Category', () => {
 			expect(category.name).toEqual('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toEqual(true);
-			expect(category.created__at).toBeInstanceOf(Date);
+			expect(category.created_at).toBeInstanceOf(Date);
 		});
 
 		test('should create a category with provided values', () => {
-			const created__at = new Date();
+			const created_at = new Date();
 			const uuid = new Uuid();
 			const category = new Category({
 				category_id: uuid,
 				name: 'Movie',
 				description: 'Movie description',
 				is_active: false,
-				created__at,
+				created_at,
 			});
 
 			expect(category.category_id).toBeInstanceOf(Uuid);
@@ -34,7 +34,7 @@ describe('Category', () => {
 			expect(category.name).toEqual('Movie');
 			expect(category.description).toEqual('Movie description');
 			expect(category.is_active).toEqual(false);
-			expect(category.created__at).toEqual(created__at);
+			expect(category.created_at).toEqual(created_at);
 		});
 	});
 
@@ -48,7 +48,7 @@ describe('Category', () => {
 			expect(category.name).toEqual('Movie');
 			expect(category.description).toBeNull();
 			expect(category.is_active).toEqual(true);
-			expect(category.created__at).toBeInstanceOf(Date);
+			expect(category.created_at).toBeInstanceOf(Date);
 			expect(validateSpy).toHaveReturnedTimes(1);
 		});
 
@@ -63,7 +63,7 @@ describe('Category', () => {
 			expect(category.name).toEqual('Movie');
 			expect(category.description).toEqual('Movie description');
 			expect(category.is_active).toEqual(false);
-			expect(category.created__at).toBeInstanceOf(Date);
+			expect(category.created_at).toBeInstanceOf(Date);
 			expect(validateSpy).toHaveReturnedTimes(1);
 		});
 	});

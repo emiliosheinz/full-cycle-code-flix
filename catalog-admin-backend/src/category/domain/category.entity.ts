@@ -8,7 +8,7 @@ export type CategoryConstructorProps = {
 	name: string;
 	description?: string;
 	is_active?: boolean;
-	created__at?: Date;
+	created_at?: Date;
 };
 
 export type CategoryCreateCommand = {
@@ -22,7 +22,7 @@ export class Category extends Entity {
 	name: string;
 	description: string | null;
 	is_active: boolean;
-	created__at: Date;
+	created_at: Date;
 
 	constructor(props: CategoryConstructorProps) {
 		super();
@@ -30,7 +30,7 @@ export class Category extends Entity {
 		this.name = props.name;
 		this.description = props.description ?? null;
 		this.is_active = props.is_active ?? true;
-		this.created__at = props.created__at ?? new Date();
+		this.created_at = props.created_at ?? new Date();
 	}
 
 	get entity_id() {
@@ -74,7 +74,7 @@ export class Category extends Entity {
 			name: this.name,
 			descriptio: this.description,
 			is_active: this.is_active,
-			created_at: this.created__at,
+			created_at: this.created_at,
 		};
 	}
 }
