@@ -10,10 +10,10 @@ describe('CategoryInMemoryRepository', () => {
 
 	test('should not filter items when filter object is null', async () => {
 		const items = [
-			new Category({ name: 'Horror' }),
-			new Category({ name: 'Action' }),
-			new Category({ name: 'Comedy' }),
-		];
+      Category.fake().aCategory().withName("Horror").build(),
+      Category.fake().aCategory().withName("Action").build(),
+      Category.fake().aCategory().withName("Comedy").build(),
+    ]
 
 		// biome-ignore lint/complexity/useLiteralKeys: access protected method
 		const result = await repository['applyFilter'](items, null);
@@ -24,9 +24,9 @@ describe('CategoryInMemoryRepository', () => {
 
   test('should filter items using the filter parameter', async () => {
     const items = [
-      new Category({ name: 'Horror' }),
-      new Category({ name: 'Action' }),
-      new Category({ name: 'Comedy' }),
+      Category.fake().aCategory().withName("Horror").build(),
+      Category.fake().aCategory().withName("Action").build(),
+      Category.fake().aCategory().withName("Comedy").build(),
     ];
 
     // biome-ignore lint/complexity/useLiteralKeys: access protected method
@@ -40,9 +40,9 @@ describe('CategoryInMemoryRepository', () => {
     const now = new Date();
 
     const items = [
-      new Category({ name: 'Horror', created_at: new Date(now.getTime() + 300) }),
-      new Category({ name: 'Action', created_at: new Date(now.getTime() + 500) }),
-      new Category({ name: 'Comedy', created_at: new Date(now.getTime() + 100) }),
+      Category.fake().aCategory().withName("Horror").withCreatedAt(new Date(now.getTime() + 300)).build(),
+      Category.fake().aCategory().withName("Action").withCreatedAt(new Date(now.getTime() + 500)).build(),
+      Category.fake().aCategory().withName("Comedy").withCreatedAt(new Date(now.getTime() + 100)).build(),
     ];
 
     // biome-ignore lint/complexity/useLiteralKeys: access protected method
