@@ -1,6 +1,6 @@
 import { Op } from 'sequelize';
 import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
-import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
+import type { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
 import { Category } from '../../../domain/category.entity';
 import { CategorySearchResult } from '../../../domain/category.repository';
 import type {
@@ -8,6 +8,7 @@ import type {
 	ICategoryRepository,
 } from '../../../domain/category.repository';
 import type { CategoryModel } from './category.model';
+import { CategoryModelMapper } from './category-model-mapper';
 
 export class CategorySequelizeRepository implements ICategoryRepository {
 	sortableFields: string[] = ['name', 'created_at'];
@@ -15,25 +16,15 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 	constructor(private readonly model: typeof CategoryModel) {}
 
 	async insert(entity: Category): Promise<void> {
-		await this.model.create({
-			category_id: entity.category_id.id,
-			name: entity.name,
-			description: entity.description,
-			is_active: entity.is_active,
-			created_at: entity.created_at,
-		});
+		const model = CategoryModelMapper.toModel(entity);
+		await this.model.create(model.toJSON());
 	}
 
 	async bulkInsert(entities: Category[]): Promise<void> {
-		await this.model.bulkCreate(
-			entities.map((entity) => ({
-				category_id: entity.category_id.id,
-				name: entity.name,
-				description: entity.description,
-				is_active: entity.is_active,
-				created_at: entity.created_at,
-			})),
+		const models = entities.map((entity) =>
+			CategoryModelMapper.toModel(entity),
 		);
+		await this.model.bulkCreate(models.map((model) => model.toJSON()));
 	}
 
 	async update(entity: Category): Promise<void> {
@@ -43,19 +34,11 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 			throw new NotFoundError(entity.category_id, this.getEntity());
 		}
 
-		await this.model.update(
-			{
-				name: entity.name,
-				description: entity.description,
-				is_active: entity.is_active,
-				created_at: entity.created_at,
-			},
-			{
-				where: {
-					category_id: entity.category_id.id,
-				},
-			},
-		);
+		const modelToUpdate = CategoryModelMapper.toModel(entity);
+
+		await this.model.update(modelToUpdate.toJSON(), {
+			where: { category_id: entity.category_id.id },
+		});
 	}
 
 	async delete(entity_id: Uuid): Promise<void> {
@@ -75,28 +58,12 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 			return null;
 		}
 
-		return new Category({
-			category_id: new Uuid(model.category_id),
-			name: model.name,
-			is_active: model.is_active,
-			created_at: model.created_at,
-			description: model.description || undefined,
-		});
+		return CategoryModelMapper.toEntity(model);
 	}
 
 	async findAll(): Promise<Category[]> {
 		const models = await this.model.findAll();
-
-		return models.map(
-			(model) =>
-				new Category({
-					category_id: new Uuid(model.category_id),
-					name: model.name,
-					is_active: model.is_active,
-					created_at: model.created_at,
-					description: model.description || undefined,
-				}),
-		);
+		return models.map((model) => CategoryModelMapper.toEntity(model));
 	}
 
 	async search(props: CategorySearchInput): Promise<CategorySearchResult> {
@@ -117,16 +84,7 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 		});
 
 		return new CategorySearchResult({
-			items: models.map(
-				(model) =>
-					new Category({
-						category_id: new Uuid(model.category_id),
-						name: model.name,
-						is_active: model.is_active,
-						created_at: model.created_at,
-						description: model.description || undefined,
-					}),
-			),
+			items: models.map((model) => CategoryModelMapper.toEntity(model)),
 			current_page: props.page,
 			per_page: props.per_page,
 			total: count,
@@ -135,6 +93,6 @@ export class CategorySequelizeRepository implements ICategoryRepository {
 
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	getEntity(): new (...args: any[]) => Category {
-    return Category;
+		return Category;
 	}
 }
