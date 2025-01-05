@@ -58,8 +58,7 @@ export abstract class InMemoryRepository<
     return this.items;
   }
 
-  // biome-ignore lint/suspicious/noExplicitAny: This is a generic method
-  abstract getEntity(): new (...args: any[]) => E;
+  abstract getEntity(): E;
 }
 
 export abstract class InMemorySearchableRepository<

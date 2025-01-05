@@ -77,7 +77,7 @@ export class Category extends Entity {
 		return {
 			category_id: this.category_id.id,
 			name: this.name,
-			descriptio: this.description,
+			description: this.description,
 			is_active: this.is_active,
 			created_at: this.created_at,
 		};
