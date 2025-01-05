@@ -1,10 +1,10 @@
 import type {
   SearchInput,
   SortDirection,
-} from '../../../shared/domain/repository/search-input';
-import type { Uuid } from '../../../shared/domain/value-objects/uuid.vo';
-import { InMemorySearchableRepository } from '../../../shared/infra/db/in-memory.repository';
-import { Category } from '../../domain/category.entity';
+} from '../../../../shared/domain/repository/search-input';
+import type { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
+import { InMemorySearchableRepository } from '../../../../shared/infra/db/in-memory.repository';
+import { Category } from '../../../domain/category.entity';
 
 export class CategoryInMemoryRepository extends InMemorySearchableRepository<
   Category,
