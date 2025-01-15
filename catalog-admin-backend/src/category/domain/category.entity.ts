@@ -69,9 +69,9 @@ export class Category extends Entity {
 		}
 	}
 
-  static fake() {
-    return CategoryFakeBuilder
-  }
+	static fake() {
+		return CategoryFakeBuilder;
+	}
 
 	toJSON() {
 		return {
