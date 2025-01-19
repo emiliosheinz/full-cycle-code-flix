@@ -16,7 +16,7 @@ describe("CategoryInMemoryRepository", () => {
 		];
 
 		// biome-ignore lint/complexity/useLiteralKeys: access protected method
-		const result = await repository['applyFilter'](items, null);
+		const result = await repository['applyFilter'](items, '');
 
 		expect(result).toHaveLength(3);
 		expect(result).toEqual(items);
