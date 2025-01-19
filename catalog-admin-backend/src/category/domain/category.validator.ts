@@ -1,37 +1,28 @@
-import {
-	IsBoolean,
-	IsNotEmpty,
-	IsOptional,
-	IsString,
-	MaxLength,
-} from 'class-validator';
-import type { Category } from './category.entity';
+import { MaxLength } from 'class-validator';
 import { ClassValidatorFields } from '../../shared/domain/validators/class-validator-field';
+import type { Notification } from '../../shared/domain/validators/notification';
 
 class CategoryRules {
-	@MaxLength(255)
-	@IsString()
-	@IsNotEmpty()
-	name: string;
+  @MaxLength(255, { groups: ['name'] })
+  name: string;
 
-	@IsString()
-	@IsOptional()
-	description: string | null;
-
-	@IsBoolean()
-	@IsNotEmpty()
-	is_active: boolean;
-
-	constructor({ name, description, is_active }: Category) {
-		this.name = name;
-		this.description = description;
-		this.is_active = is_active;
-	}
+  constructor({ name }: { name: string }) {
+    this.name = name;
+  }
 }
 
 export class CategoryValidator extends ClassValidatorFields {
-	validate<Category>(entity: Category) {
-		// biome-ignore lint: weird type issue
-		return super.validate(new CategoryRules(entity as any));
-	}
+  validate(
+    notification: Notification,
+    data: unknown,
+    fields?: string[],
+  ): boolean {
+    const fieldsWithFallback = fields?.length ? fields : ['name'];
+    return super.validate(
+      notification,
+      // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+      new CategoryRules(data as any),
+      fieldsWithFallback,
+    );
+  }
 }

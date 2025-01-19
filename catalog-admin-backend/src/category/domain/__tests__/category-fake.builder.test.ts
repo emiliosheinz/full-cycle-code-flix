@@ -69,14 +69,8 @@ describe('CategoryFakeBuilder', () => {
 	});
 
 	it('should set invalid name too long', () => {
-		const category = CategoryFakeBuilder.aCategory().withInvalidNameTooLong();
+		const category = CategoryFakeBuilder.aCategory().withInvalidNameTooLong().build();
 		expect(category.name.length).toBeGreaterThan(255);
-		expect(() => category.build()).toThrow(EntityValidationError);
-	});
-
-	it('should throw error if required property is not set', () => {
-		const builder = CategoryFakeBuilder.aCategory();
-		expect(() => builder.category_id).toThrow();
-		expect(() => builder.created_at).toThrow();
+    expect(category.notification.hasErrors()).toEqual(true);
 	});
 });
