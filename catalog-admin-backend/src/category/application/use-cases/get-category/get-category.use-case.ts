@@ -1,8 +1,8 @@
-import type { IUseCase } from '../../../shared/application/use-case.interface';
-import { NotFoundError } from '../../../shared/domain/errors/not-found.error';
-import { Uuid } from '../../../shared/domain/value-objects/uuid.vo';
-import type { ICategoryRepository } from '../../domain/category.repository';
-import { type CategoryOutput, CategoryOutputMapper } from './common/category-output';
+import type { IUseCase } from '../../../../shared/application/use-case.interface';
+import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
+import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
+import type { ICategoryRepository } from '../../../domain/category.repository';
+import { type CategoryOutput, CategoryOutputMapper } from '../common/category-output';
 
 export type GetCategoryInput = {
 	id: string;
