@@ -1,11 +1,11 @@
-import type { IUseCase } from '../../../shared/application/use-case.interface';
-import { EntityValidationError } from '../../../shared/domain/validators/validation.error';
-import { Category } from '../../domain/category.entity';
-import type { ICategoryRepository } from '../../domain/category.repository';
+import type { IUseCase } from '../../../../shared/application/use-case.interface';
+import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
+import { Category } from '../../../domain/category.entity';
+import type { ICategoryRepository } from '../../../domain/category.repository';
 import {
   CategoryOutputMapper,
   type CategoryOutput,
-} from './common/category-output';
+} from '../common/category-output';
 
 type CreateCategoryInput = {
   name: string;

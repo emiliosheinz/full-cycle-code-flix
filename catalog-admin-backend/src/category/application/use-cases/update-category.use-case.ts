@@ -48,7 +48,6 @@ export class UpdateCategoryUseCase
     }
 
 		await this.categoryRepository.update(category);
-
 		return CategoryOutputMapper.toOutput(category);
 	}
 }
