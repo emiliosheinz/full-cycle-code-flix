@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { Entity } from '../../domain/entity';
 import { Uuid } from '../../domain/value-objects/uuid.vo';
-import type { ValueObject } from '../../domain/value-object';
+import { ValueObject } from '../../domain/value-object';
 import { InMemorySearchableRepository } from './in-memory.repository';
 import { SearchInput } from '../../domain/repository/search-input';
 import { SearchResult } from '../../domain/repository/search-result';

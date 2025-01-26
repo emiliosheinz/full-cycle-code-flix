@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { Entity } from '../../domain/entity';
-import type { ValueObject } from '../../domain/value-object';
+import { ValueObject } from '../../domain/value-object';
 import { Uuid } from '../../domain/value-objects/uuid.vo';
 import { InMemoryRepository } from './in-memory.repository';
 import { NotFoundError } from '../../domain/errors/not-found.error';

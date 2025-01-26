@@ -1,8 +1,5 @@
 import { SearchInput } from '../search-input';
-import type {
-	SearchParamsConstructorProps,
-	SortDirection,
-} from '../search-input';
+import { SearchParamsConstructorProps, SortDirection } from '../search-input';
 
 describe('SearchInput', () => {
 	test('should set default values when no props are provided', () => {

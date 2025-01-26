@@ -1,5 +1,5 @@
-import type { Entity } from '../entity';
-import type { ValueObject } from '../value-object';
+import { Entity } from '../entity';
+import { ValueObject } from '../value-object';
 
 export class NotFoundError extends Error {
 	constructor(

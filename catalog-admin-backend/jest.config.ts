@@ -3,7 +3,7 @@
  * https://jestjs.io/docs/configuration
  */
 
-import type { Config } from 'jest';
+import { Config } from 'jest';
 
 const config: Config = {
 	moduleFileExtensions: ['js', 'json', 'ts'],

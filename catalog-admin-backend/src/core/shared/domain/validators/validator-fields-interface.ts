@@ -1,4 +1,4 @@
-import type { Notification } from './notification';
+import { Notification } from './notification';
 
 export type FieldsErrors =
 	| {

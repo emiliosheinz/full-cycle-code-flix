@@ -1,15 +1,15 @@
-import type { Entity } from '../../domain/entity';
+import { Entity } from '../../domain/entity';
 import { NotFoundError } from '../../domain/errors/not-found.error';
-import type {
+import {
 	IRespository,
 	ISearchableRepository,
 } from '../../domain/repository/repository-interface';
-import type {
+import {
 	SearchInput,
 	SortDirection,
 } from '../../domain/repository/search-input';
 import { SearchResult } from '../../domain/repository/search-result';
-import type { ValueObject } from '../../domain/value-object';
+import { ValueObject } from '../../domain/value-object';
 
 export abstract class InMemoryRepository<
 	E extends Entity,

@@ -1,4 +1,4 @@
-import type { Entity } from '../entity';
+import { Entity } from '../entity';
 import { ValueObject } from '../value-object';
 
 type SearchResultConstructorProps<E extends Entity> = {

@@ -1,7 +1,7 @@
-import type { Entity } from '../entity';
-import type { ValueObject } from '../value-object';
-import type { SearchInput } from './search-input';
-import type { SearchResult } from './search-result';
+import { Entity } from '../entity';
+import { ValueObject } from '../value-object';
+import { SearchInput } from './search-input';
+import { SearchResult } from './search-result';
 
 export interface IRespository<E extends Entity, I extends ValueObject> {
 	insert(entity: E): Promise<void>;

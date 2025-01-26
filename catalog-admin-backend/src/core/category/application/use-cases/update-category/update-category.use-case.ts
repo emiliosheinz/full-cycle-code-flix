@@ -1,13 +1,13 @@
-import type { IUseCase } from '../../../../shared/application/use-case.interface';
+import { IUseCase } from '../../../../shared/application/use-case.interface';
 import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
 import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
 import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
-import type { ICategoryRepository } from '../../../domain/category.repository';
+import { ICategoryRepository } from '../../../domain/category.repository';
 import {
 	CategoryOutputMapper,
 	type CategoryOutput,
 } from '../common/category-output';
-import type { UpdateCategoryInput } from './update-category.input';
+import { UpdateCategoryInput } from './update-category.input';
 
 type UpdateCategoryOutput = CategoryOutput;
 

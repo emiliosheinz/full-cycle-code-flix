@@ -1,4 +1,4 @@
-import type { Notification } from '../../domain/validators/notification';
+import { Notification } from '../../domain/validators/notification';
 
 expect.extend({
 	notificationContainsErrorMessages(

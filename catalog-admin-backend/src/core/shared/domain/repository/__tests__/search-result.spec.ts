@@ -1,5 +1,5 @@
 import { Entity } from '../../entity';
-import type { ValueObject } from '../../value-object';
+import { ValueObject } from '../../value-object';
 import { Uuid } from '../../value-objects/uuid.vo';
 import { SearchResult } from '../search-result';
 

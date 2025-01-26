@@ -2,8 +2,8 @@ import {
 	type PaginationOutput,
 	PaginationOutputMapper,
 } from '../../../../shared/application/pagination-output';
-import type { IUseCase } from '../../../../shared/application/use-case.interface';
-import type { SortDirection } from '../../../../shared/domain/repository/search-input';
+import { IUseCase } from '../../../../shared/application/use-case.interface';
+import { SortDirection } from '../../../../shared/domain/repository/search-input';
 import {
 	type CategoryFilter,
 	CategorySearchInput,

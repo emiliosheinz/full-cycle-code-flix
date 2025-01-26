@@ -1,7 +1,7 @@
 import { Chance } from 'chance';
 import { CategoryFakeBuilder } from '../category-fake.builder';
 import { Category } from '../category.entity';
-import type { Uuid } from '../../../shared/domain/value-objects/uuid.vo';
+import { Uuid } from '../../../shared/domain/value-objects/uuid.vo';
 import {
 	EntityValidationError,
 	ValidationError,

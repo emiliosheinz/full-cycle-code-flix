@@ -1,7 +1,7 @@
-import type { IUseCase } from '../../../../shared/application/use-case.interface';
+import { IUseCase } from '../../../../shared/application/use-case.interface';
 import { NotFoundError } from '../../../../shared/domain/errors/not-found.error';
 import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
-import type { ICategoryRepository } from '../../../domain/category.repository';
+import { ICategoryRepository } from '../../../domain/category.repository';
 import {
 	type CategoryOutput,
 	CategoryOutputMapper,

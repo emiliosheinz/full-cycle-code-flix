@@ -1,11 +1,11 @@
-import type {
+import {
 	SearchInput,
 	SortDirection,
 } from '../../../../shared/domain/repository/search-input';
-import type { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
+import { Uuid } from '../../../../shared/domain/value-objects/uuid.vo';
 import { InMemorySearchableRepository } from '../../../../shared/infra/db/in-memory.repository';
 import { Category } from '../../../domain/category.entity';
-import type {
+import {
 	CategoryFilter,
 	ICategoryRepository,
 } from '../../../domain/category.repository';

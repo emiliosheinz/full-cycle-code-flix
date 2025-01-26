@@ -1,4 +1,4 @@
-import type { SearchResult } from '../domain/repository/search-result';
+import { SearchResult } from '../domain/repository/search-result';
 
 export type PaginationOutput<Item = unknown> = {
 	items: Item[];

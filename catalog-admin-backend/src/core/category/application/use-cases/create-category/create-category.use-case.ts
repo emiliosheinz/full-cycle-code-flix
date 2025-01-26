@@ -1,7 +1,7 @@
-import type { IUseCase } from '../../../../shared/application/use-case.interface';
+import { IUseCase } from '../../../../shared/application/use-case.interface';
 import { EntityValidationError } from '../../../../shared/domain/validators/validation.error';
 import { Category } from '../../../domain/category.entity';
-import type { ICategoryRepository } from '../../../domain/category.repository';
+import { ICategoryRepository } from '../../../domain/category.repository';
 import {
 	CategoryOutputMapper,
 	type CategoryOutput,
