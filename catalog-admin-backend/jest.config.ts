@@ -37,6 +37,9 @@ const config: Config = {
   setupFilesAfterEnv: ['./core/shared/infra/testing/expect-helpers.ts'],
 	coverageProvider: 'v8',
 	clearMocks: true,
+  moduleNameMapper: {
+    "^@core/(.*)$": "<rootDir>/core/$1"
+  }
 };
 
 export default config;
