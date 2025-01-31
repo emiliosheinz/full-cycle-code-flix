@@ -14,7 +14,6 @@ import { CategorySequelizeRepository } from '@core/category/infra/db/sequelize/c
 @Controller('categories')
 export class CategoriesController {
 	constructor(private categoryRepository: CategorySequelizeRepository) {
-		console.log(categoryRepository);
 	}
 
 	@Post()
